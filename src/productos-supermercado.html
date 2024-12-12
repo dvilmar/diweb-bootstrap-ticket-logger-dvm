@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Búsqueda de productos más vendidos por supermercado">
+    <meta name="author" content="Daniel Vilar Martínez">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Productos más vendidos - Supermercado</title>
+
+    <!-- Bootstrap ICONS CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
+    <!-- Estilos personalizados -->
+    <link href="/assets/css/styles.css" rel="stylesheet">
+
+    <style>
+      .product-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 30px;
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .product-card-body {
+        padding: 15px;
+      }
+
+      .product-price {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+
+      .filter-sidebar {
+        border-right: 1px solid #ddd;
+        padding-right: 20px;
+      }
+
+      .filter-sidebar h4 {
+        font-size: 1.25rem;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .product-card .product-name {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      .filter-sidebar .form-check-label {
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <header>
+      <nav class="navbar bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Portfolio de Daniel Vilar Martínez - DAW</a>
+        <div class="d-flex">
+          <button id="login" class="btn btn-outline-primary me-2">
+            <a class="nav-link" href="/login">Login</a>
+          </button>
+          <button id="registro" class="btn btn-outline-primary me-2">
+            <a class="nav-link" href="/registro">Registro</a>
+          </button>
+          <button id="themeToggle" class="btn btn-outline-primary me-2">
+            <i class="bi bi-sun" id="themeIcon"></i>
+          </button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/productos-supermercado">Productos más vendidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a>
+              </li>
+            </ul>
+            <form class="d-flex mt-3" role="search">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+          </div>
+      </div>
+    </nav>
+    </header>
+
+    <main class="container py-5">
+      <div class="row">
+        <div class="col-md-3 filter-sidebar">
+          <br>  
+          <h4>Filtros</h4>
+
+          <div class="mb-3">
+            <h5>Categoría</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="frutas" id="filterFrutas">
+              <label class="form-check-label" for="filterFrutas">Frutas</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="verduras" id="filterVerduras">
+              <label class="form-check-label" for="filterVerduras">Verduras</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="panadería" id="filterPanaderia">
+              <label class="form-check-label" for="filterPanaderia">Panadería</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <h5>Rango de Precio</h5>
+            <input type="range" class="form-range" id="priceRange" min="0" max="500" step="10">
+            <p>Precio: $0 - <span id="priceRangeValue">500</span></p>
+          </div>
+
+          <div class="mb-3">
+            <h5>Marca</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="marcaA" id="filterMarcaA">
+              <label class="form-check-label" for="filterMarcaA">Marca A</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="marcaB" id="filterMarcaB">
+              <label class="form-check-label" for="filterMarcaB">Marca B</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <br>  
+          <h1 class="text-center mb-4">Productos más vendidos</h1>
+
+          <div class="product-grid">
+            <div class="product-card">
+              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <div class="product-card-body">
+                <p class="product-name">Producto 1</p>
+                <p class="product-price">$20.00</p>
+                <button class="btn btn-primary w-100">Ver más información</button>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="https://via.placeholder.com/300x200" alt="Producto 2">
+              <div class="product-card-body">
+                <p class="product-name">Producto 2</p>
+                <p class="product-price">$35.00</p>
+                <button class="btn btn-primary w-100">Ver más información</button>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="https://via.placeholder.com/300x200" alt="Producto 3">
+              <div class="product-card-body">
+                <p class="product-name">Producto 3</p>
+                <p class="product-price">$15.00</p>
+                <button class="btn btn-primary w-100">Ver más información</button>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <img src="https://via.placeholder.com/300x200" alt="Producto 4">
+              <div class="product-card-body">
+                <p class="product-name">Producto 4</p>
+                <p class="product-price">$50.00</p>
+                <button class="btn btn-primary w-100">Ver más información</button>
+              </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200" alt="Producto 4">
+                <div class="product-card-body">
+                  <p class="product-name">Producto 5</p>
+                  <p class="product-price">$50.00</p>
+                  <button class="btn btn-primary w-100">Ver más información</button>
+                </div>
+              </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200" alt="Producto 4">
+                <div class="product-card-body">
+                  <p class="product-name">Producto 6</p>
+                  <p class="product-price">$50.00</p>
+                  <button class="btn btn-primary w-100">Ver más información</button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container-fluid text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p class="mb-1">Este sitio web es &copy; 2024 por Daniel Vilar Martínez.</p>
+        <p class="mb-0">¿Quieres contratar mis servicios? <a href="/formulario-pago.html">Contrátanos</a> o <a href="#">contacta con nosotros</a>.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/assets/js/main.js"></script>
+  </body>
+</html>
