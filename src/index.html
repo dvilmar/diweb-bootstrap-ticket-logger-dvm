@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en" data-bs-theme="light">
+<html lang="es" data-bs-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Album example · Bootstrap v5.0</title>
+    <meta name="description" content="Ticket Logger - Gestión de Tickets de Soporte">
+    <meta name="author" content="Tu nombre o tu empresa">
+    <meta name="generator" content="Ticket Logger">
+    <title>Ticket Logger - Aplicación Web de Soporte</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+    <link rel="canonical" href="https://www.ticketlogger.com">
 
     <!-- Bootstrap ICONS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
@@ -38,13 +38,13 @@
     <header>
       <nav class="navbar bg-body-tertiary fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">Portfolio de Daniel Vilar Martínez - DAW</a>
+          <a class="navbar-brand" href="/">Ticket Logger - Gestión de Tickets</a>
           <div class="d-flex">
             <button id="login" class="btn btn-outline-primary me-2">
-              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/login">Iniciar Sesión</a>
             </button>
             <button id="registro" class="btn btn-outline-primary me-2">
-              <a class="nav-link" href="/registro">Registro</a>
+              <a class="nav-link" href="/registro">Registrarse</a>
             </button>
             <button id="themeToggle" class="btn btn-outline-primary me-2">
               <i class="bi bi-sun" id="themeIcon"></i>
@@ -64,157 +64,74 @@
                   <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a>
+                  <a class="nav-link" href="/crear-ticket">Crear Ticket</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/productos-supermercado">Productos más vendidos</a>
+                  <a class="nav-link" href="/mis-tickets">Mis Tickets</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a>
+                  <a class="nav-link" href="/contacto">Contacto</a>
                 </li>
               </ul>
-              <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-              </form>
             </div>
+          </div>
         </div>
       </nav>
     </header>
-<main>
 
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Portfolio de Daniel Vilar - DAW</h1>
-      <p class="lead text-muted">Este portafolio recopila los proyectos realizados por el alumno durante los cursos de Desarrollo de Aplicaciones Web (DAW). Aquí podrás ver los trabajos prácticos, aplicaciones desarrolladas y otros logros alcanzados durante la formación.</p>
-      <p>
-        <a href="#portfolio" class="btn btn-primary my-2">Ver Proyectos</a>
-        <a href="/formulario-pago.html" class="btn btn-secondary my-2">Contrata mis servicios</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<div id="portfolio" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  <div class="col">
-    <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Proyecto 1" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Proyecto 1</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proyecto 1</text></svg>
-
-      <div class="card-body">
-        <p class="card-text">Desarrollo de una aplicación web para gestionar tareas y usuarios con roles básicos.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalles</button>
+    <main>
+      <!-- Sección Principal de Bienvenida -->
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-12 mx-auto">
+            <h2 class="fw-light">Bienvenido a Ticket Logger</h2>
+            <p class="lead text-muted">Ticket Logger es tu herramienta para gestionar y hacer seguimiento a los tickets de soporte. Administra tus solicitudes de forma rápida y eficiente.</p>
+            <p>
+              <a href="/crear-ticket" class="btn btn-primary my-2">Crear Nuevo Ticket</a>
+              <a href="/mis-tickets" class="btn btn-secondary my-2">Ver Mis Tickets</a>
+            </p>
           </div>
-          <small class="text-muted">Finalizado en 2023</small>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Proyecto 2" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Proyecto 2</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proyecto 2</text></svg>
+      </section>
 
-      <div class="card-body">
-        <p class="card-text">Creación de una web con HTML y CSS que aplica buenas prácticas de maquetación.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalles</button>
+      <!-- Sección Informativa General -->
+      <section class="text-center py-5">
+        <h3 class="fw-light">¿Qué es Ticket Logger?</h3>
+        <p>Ticket Logger es una aplicación web diseñada para gestionar tickets de soporte. Puedes crear, administrar y dar seguimiento a tus tickets de manera sencilla y organizada.</p>
+      </section>
+
+      <!-- Características principales -->
+      <section class="text-center py-5">
+        <h3 class="fw-light">Características Principales</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Gestión de Tickets</h5>
+            <p>Crea y organiza tus tickets de soporte fácilmente.</p>
           </div>
-          <small class="text-muted">Finalizado en 2023</small>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Proyecto 3" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Proyecto 3</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proyecto 3</text></svg>
-
-      <div class="card-body">
-        <p class="card-text">Aplicación web dinámica con conexión a base de datos utilizando Spring Boot y MariaDB para una gestión de inventarios.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalles</button>
+          <div class="col-md-4">
+            <h5>Notificaciones en Tiempo Real</h5>
+            <p>Recibe actualizaciones sobre el estado de tus tickets en tiempo real.</p>
           </div>
-          <small class="text-muted">Finalizado en 2024</small>
+          <div class="col-md-4">
+            <h5>Soporte Eficiente</h5>
+            <p>Accede a un sistema rápido y eficiente para resolver tus problemas.</p>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Proyecto 4" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Proyecto 4</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proyecto 4</text></svg>
+      </section>
       
-      <div class="card-body">
-        <p class="card-text">Desarrollo de una API RESTful para un sistema de reservas con Spring Boot.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalles</button>
-          </div>
-          <small class="text-muted">Finalizado en 2024</small>
-        </div>
+    </main>
+
+    <footer class="container-fluid text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p class="mb-1">Este sitio es &copy; 2024 por Ticket Logger. ¡Gracias por usar nuestra aplicación!</p>
+        <p class="mb-0">¿Tienes alguna pregunta? <a href="/contacto">Contáctanos</a></p>
       </div>
-    </div>
-  </div>
+    </footer>
 
-  <div class="col">
-    <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Proyecto 5" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Proyecto 5</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proyecto 5</text></svg>
-
-      <div class="card-body">
-        <p class="card-text">Creación de una aplicación móvil híbrida con Ionic para gestionar eventos y notificaciones.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalles</button>
-          </div>
-          <small class="text-muted">Finalizado en 2024</small>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card shadow-sm">
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Proyecto 6" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Proyecto 6</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Proyecto 6</text></svg>
-
-      <div class="card-body">
-        <p class="card-text">Integración de un sistema de pagos en un e-commerce.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalles</button>
-          </div>
-          <small class="text-muted">Finalizado en 2024</small>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-</main>
-
-<footer class="container-fluid text-muted py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Volver arriba</a>
-    </p>
-    <p class="mb-1">Este portafolio es &copy; 2024 por Daniel Vilar Martínez. ¡Mira los proyectos!</p>
-    <p class="mb-0">¿Quieres contratar mis servicios? <a href="/formulario-pago.html">Contrátanos</a> o <a href="#">contacta con nosotros</a>.</p>
-  </div>
-</footer>
-
-
-<script type="module" src="./assets/js/main.js"></script>
-
+    <script type="module" src="./assets/js/main.js"></script>
       
   </body>
 </html>
