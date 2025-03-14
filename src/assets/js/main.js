@@ -1,60 +1,57 @@
 // Import our custom CSS
 import '../../scss/styles.scss'
 
-
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 
+/**
+ * Carga componentes HTML dinámicamente.
+ * @param {string} component - Nombre del componente (sin extensión).
+ * @param {string} target - Selector del elemento donde insertar el componente.
+ */
+async function loadComponent(component, target) {
+  try {
+    const response = await fetch(`../components/${component}.html`);
+    if (!response.ok) throw new Error(`Error cargando ${component}`);
+    const html = await response.text();
+    document.querySelector(target).innerHTML = html;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 /**
-* Configura el cambio de tema entre claro y oscuro al hacer clic en un botón.
-* Se ejecuta cuando el contenido del documento ha sido completamente cargado.
-*
-* @event DOMContentLoaded
-*/
-document.addEventListener('DOMContentLoaded', () => {
-   /**
-    * Botón de alternancia de tema.
-    * @type {HTMLElement}
-    */
-   const themeToggleBtn = document.getElementById('themeToggle');
+ * Configura el cambio de tema entre claro y oscuro al hacer clic en un botón.
+ * Se ejecuta cuando el contenido del documento ha sido completamente cargado.
+ */
+document.addEventListener('DOMContentLoaded', async () => {
+  // Cargar componentes comunes
+  await loadComponent('header', 'header');
+  await loadComponent('footer', 'footer');
 
+  const themeToggleBtn = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
 
-   /**
-    * Icono del botón de alternancia de tema.
-    * @type {HTMLElement}
-    */
-   const themeIcon = document.getElementById('themeIcon');
+  // Verificar que los elementos existen antes de asignar eventos
+  if (!themeToggleBtn || !themeIcon) return;
 
+  // Aplicar el tema guardado en LocalStorage o 'light' por defecto
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-bs-theme', savedTheme);
+  themeIcon.classList.add(savedTheme === 'dark' ? 'bi-moon' : 'bi-sun');
 
-   /**
-    * Evento que alterna el tema entre claro y oscuro.
-    *
-    * @event click
-    */
-   themeToggleBtn.addEventListener('click', () => {
-       /**
-        * Tema actual del documento. Por defecto, se asume que es 'light' si no se ha establecido.
-        * @type {string}
-        */
-       const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
-      
-       /**
-        * Nuevo tema a establecer, dependiendo del tema actual.
-        * @type {string}
-        */
-       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      
-       // Establece el nuevo tema en el atributo data-bs-theme del elemento <html>
-       document.documentElement.setAttribute('data-bs-theme', newTheme);
-      
-       // Cambiar el icono según el nuevo tema
-       if (newTheme === 'dark') {
-           themeIcon.classList.remove('bi-sun');
-           themeIcon.classList.add('bi-moon');
-       } else {
-           themeIcon.classList.remove('bi-moon');
-           themeIcon.classList.add('bi-sun');
-       }
-   });
+  /**
+   * Evento que alterna el tema entre claro y oscuro.
+   */
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    // Aplicar el nuevo tema y guardarlo en LocalStorage
+    document.documentElement.setAttribute('data-bs-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    // Cambiar el icono según el nuevo tema
+    themeIcon.classList.replace(currentTheme === 'light' ? 'bi-sun' : 'bi-moon', newTheme === 'dark' ? 'bi-moon' : 'bi-sun');
+  });
 });
