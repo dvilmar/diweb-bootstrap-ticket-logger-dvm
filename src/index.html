@@ -4,24 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Ticket Logger - Gestión de Tickets de Soporte">
-    <meta name="author" content="Tu nombre o tu empresa">
+    <meta name="author" content="Daniel">
     <meta name="generator" content="Ticket Logger">
     <title>Ticket Logger - Aplicación Web de Soporte</title>
 
     <link rel="canonical" href="https://www.ticketlogger.com">
-
-    <!-- Bootstrap ICONS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-
-    <!-- Estilos personalizados -->
     <link href="/assets/css/styles.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
         user-select: none;
       }
 
@@ -30,48 +24,45 @@
           font-size: 3.5rem;
         }
       }
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+      }
     </style>  
-    
   </head>
+
   <body>
-    
     <header>
-      <nav class="navbar bg-body-tertiary fixed-top">
+      <nav class="navbar bg-black  fixed-top" aria-label="Menú principal">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">Ticket Logger - Gestión de Tickets</a>
+          <a class="navbar-brand text-white" href="/">Ticket Logger - Gestión de Tickets</a>
+
           <div class="d-flex">
-            <button id="login" class="btn btn-outline-primary me-2">
-              <a class="nav-link" href="/login">Iniciar Sesión</a>
+            <!-- Botones corregidos: no deben contener <a> dentro -->
+            <a href="/login" class="btn btn-outline-primary me-2" role="button" aria-label="Iniciar sesión">Iniciar Sesión</a>
+            <a href="/registro" class="btn btn-outline-primary me-2" role="button" aria-label="Registrarse">Registrarse</a>
+
+            <!-- Botón para cambiar tema con icono accesible -->
+            <button id="themeToggle" class="btn btn-outline-primary me-2" aria-label="Cambiar tema claro/oscuro">
+              <i class="bi bi-sun" id="themeIcon" aria-hidden="true"></i>
             </button>
-            <button id="registro" class="btn btn-outline-primary me-2">
-              <a class="nav-link" href="/registro">Registrarse</a>
-            </button>
-            <button id="themeToggle" class="btn btn-outline-primary me-2">
-              <i class="bi bi-sun" id="themeIcon"></i>
-            </button>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Abrir menú de navegación">
+              <span class="navbar-toggler-icon" aria-hidden="true"></span>
             </button>
           </div>
+
           <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/crear-ticket">Crear Ticket</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/mis-tickets">Mis Tickets</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/contacto">Contacto</a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="/productos-supermercado">Productos más vendidos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
               </ul>
             </div>
           </div>
@@ -79,59 +70,63 @@
       </nav>
     </header>
 
-    <main>
-      <!-- Sección Principal de Bienvenida -->
-      <section class="py-5 text-center container">
+    <main id="contenido-principal">
+      <section class="py-5 text-center container" aria-labelledby="bienvenida-heading">
         <div class="row py-lg-5">
           <div class="col-lg-12 mx-auto">
-            <h2 class="fw-light">Bienvenido a Ticket Logger</h2>
+            <h2 id="bienvenida-heading" class="fw-light fw-bold">Bienvenido a Ticket Logger</h2>
             <p class="lead text-muted">Ticket Logger es tu herramienta para gestionar y hacer seguimiento a los tickets de soporte. Administra tus solicitudes de forma rápida y eficiente.</p>
             <p>
-              <a href="/crear-ticket" class="btn btn-primary my-2">Crear Nuevo Ticket</a>
-              <a href="/mis-tickets" class="btn btn-secondary my-2">Ver Mis Tickets</a>
+              <a href="/crear-ticket" class="btn btn-primary btn-lg my-2" role="button">Crear Nuevo Ticket</a>
+              <a href="/mis-tickets" class="btn btn-secondary btn-lg my-2" role="button">Ver Mis Tickets</a>
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Sección Informativa General -->
-      <section class="text-center py-5">
-        <h3 class="fw-light">¿Qué es Ticket Logger?</h3>
-        <p>Ticket Logger es una aplicación web diseñada para gestionar tickets de soporte. Puedes crear, administrar y dar seguimiento a tus tickets de manera sencilla y organizada.</p>
+      <section class="text-center py-5" aria-labelledby="que-es-heading">
+        <h3 id="que-es-heading" class="fw-light fw-bold">¿Qué es Ticket Logger?</h3>
+        <p class="lead text-muted">Ticket Logger es una aplicación web diseñada para gestionar tickets de soporte. Puedes crear, administrar y dar seguimiento a tus tickets de manera sencilla y organizada.</p>
       </section>
 
-      <!-- Características principales -->
-      <section class="text-center py-5">
-        <h3 class="fw-light">Características Principales</h3>
+      <section class="text-center py-5" aria-labelledby="caracteristicas-heading">
+        <h3 id="caracteristicas-heading" class="fw-light">Características principales:</h3>
+        <br>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 lead text-muted">
             <h5>Gestión de Tickets</h5>
             <p>Crea y organiza tus tickets de soporte fácilmente.</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 lead text-muted">
             <h5>Notificaciones en Tiempo Real</h5>
             <p>Recibe actualizaciones sobre el estado de tus tickets en tiempo real.</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 lead text-muted">
             <h5>Soporte Eficiente</h5>
             <p>Accede a un sistema rápido y eficiente para resolver tus problemas.</p>
           </div>
         </div>
       </section>
-      
     </main>
 
-    <footer class="container-fluid text-muted py-5">
+    <!-- FOOTER -->
+    <footer class="container-fluid bg-black text-white py-5 mt-auto">
       <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p class="mb-1">Este sitio es &copy; 2024 por Ticket Logger. ¡Gracias por usar nuestra aplicación!</p>
-        <p class="mb-0">¿Tienes alguna pregunta? <a href="/contacto">Contáctanos</a></p>
+        <p class="float-end mb-1"><a href="#">Volver arriba</a></p>
+        <p class="mb-1">Este portafolio es &copy; 2024 por Daniel Vilar Martínez. ¡Mira los proyectos!</p>
+        <p class="mb-0">¿Quieres contratar mis servicios? <a href="/formulario-pago.html">Contrátanos</a> o <a href="#">contacta con nosotros</a>.</p>
+        <div class="mt-4 text-center">
+          <p>
+            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+            </a>
+            <br>
+            Este contenido está bajo una <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">licencia de Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.
+          </p>
+        </div>      
       </div>
     </footer>
 
     <script type="module" src="./assets/js/main.js"></script>
-      
   </body>
 </html>

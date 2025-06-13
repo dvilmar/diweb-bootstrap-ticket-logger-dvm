@@ -8,117 +8,122 @@
     <title>Registro · Portafolio DAW</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
-
-    <!-- Bootstrap ICONS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-
-    <!-- Estilos personalizados -->
     <link href="/assets/css/styles.css" rel="stylesheet">
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+      }
     </style>
   </head>
+
   <body class="d-flex flex-column min-vh-100"> 
-    
     <header>
-    <nav class="navbar navbar-dark bg-black fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">TICKET LOGGER</a>
-        <div class="d-flex">
-          <button id="login" class="btn btn-outline-primary me-2">
-            <a class="nav-link" href="/login">Login</a>
-          </button>
-          <button id="registro" class="btn btn-outline-primary me-2">
-            <a class="nav-link" href="/registro">Registro</a>
-          </button>
-          <button id="themeToggle" class="btn btn-outline-primary me-2">
-            <i class="bi bi-sun" id="themeIcon"></i>
-          </button>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+      <nav class="navbar bg-black fixed-top" aria-label="Menú principal">
+        <div class="container-fluid">
+          <a class="navbar-brand  text-white" href="/">Ticket Logger - Gestión de Tickets</a>
+
+          <div class="d-flex">
+            <!-- Botones corregidos: no deben contener <a> dentro -->
+            <a href="/login" class="btn btn-outline-primary me-2" role="button" aria-label="Iniciar sesión">Iniciar Sesión</a>
+            <a href="/registro" class="btn btn-outline-primary me-2" role="button" aria-label="Registrarse">Registrarse</a>
+
+            <!-- Botón para cambiar tema con icono accesible -->
+            <button id="themeToggle" class="btn btn-outline-primary me-2" aria-label="Cambiar tema claro/oscuro">
+              <i class="bi bi-sun" id="themeIcon" aria-hidden="true"></i>
+            </button>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Abrir menú de navegación">
+              <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="/productos-supermercado">Productos más vendidos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/productos-supermercado">Productos más vendidos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a>
-              </li>
-            </ul>
-            <form class="d-flex mt-3" role="search">
-              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
-          </div>
-      </div>
-    </nav>
+      </nav>
     </header>
 
+    <!-- Main -->
     <main class="container py-5">
+      <br>
       <h1 class="text-center mb-4">Registro de usuario</h1>
-      
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <form>
+          <form aria-labelledby="formRegistroHeading">
+            <h2 id="formRegistroHeading" class="visually-hidden">Formulario de registro</h2>
+
             <div class="mb-3">
               <label for="inputName" class="form-label">Nombre completo</label>
-              <input type="text" class="form-control" id="inputName" placeholder="Tu nombre completo" required>
+              <input type="text" class="form-control" id="inputName" name="nombre" placeholder="Tu nombre completo" required>
             </div>
+
             <div class="mb-3">
               <label for="inputEmail" class="form-label">Correo electrónico</label>
-              <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@correo.com" required>
+              <input type="email" class="form-control" id="inputEmail" name="email" placeholder="ejemplo@correo.com" required>
             </div>
+
             <div class="mb-3">
               <label for="inputUsername" class="form-label">Nombre de usuario</label>
-              <input type="text" class="form-control" id="inputUsername" placeholder="Tu nombre de usuario" required>
+              <input type="text" class="form-control" id="inputUsername" name="usuario" placeholder="Tu nombre de usuario" required>
             </div>
+
             <div class="mb-3">
               <label for="inputPassword" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" required>
+              <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Contraseña" required>
             </div>
+
             <div class="mb-3">
               <label for="inputConfirmPassword" class="form-label">Confirmar contraseña</label>
-              <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirmar contraseña" required>
+              <input type="password" class="form-control" id="inputConfirmPassword" name="confirmar_password" placeholder="Confirmar contraseña" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+
+            <button type="submit" class="btn btn-primary w-100" aria-label="Enviar formulario de registro">Registrarse</button>
           </form>
         </div>
       </div>
     </main>
 
+    <!-- Footer -->
     <footer class="container-fluid bg-black text-white py-5 mt-auto">
       <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Volver arriba</a>
-        </p>
+        <p class="float-end mb-1"><a href="#">Volver arriba</a></p>
         <p class="mb-1">Este portafolio es &copy; 2024 por Daniel Vilar Martínez. ¡Mira los proyectos!</p>
         <p class="mb-0">¿Quieres contratar mis servicios? <a href="/formulario-pago.html">Contrátanos</a> o <a href="#">contacta con nosotros</a>.</p>
+
+        <!-- Licencia Creative Commons -->
+        <div class="mt-4 text-center">
+          <p>
+            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+            </a>
+            <br>
+            Este contenido está bajo una <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">licencia de Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.
+          </p>
+        </div>
       </div>
     </footer>
 

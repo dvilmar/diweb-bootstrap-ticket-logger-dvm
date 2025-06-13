@@ -1,294 +1,272 @@
 <!doctype html>
 <html lang="es" data-bs-theme="light">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Búsqueda de productos más vendidos por supermercado">
-    <meta name="author" content="Daniel Vilar Martínez">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Productos más vendidos - Supermercado</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Búsqueda de productos más vendidos por supermercado">
+  <meta name="author" content="Daniel Vilar Martínez">
+  <title>Productos más vendidos - Supermercado</title>
 
-    <!-- Bootstrap ICONS CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+  <link href="/assets/css/styles.css" rel="stylesheet">
 
-    <!-- Estilos personalizados -->
-    <link href="/assets/css/styles.css" rel="stylesheet">
+  <style>
+    /* Estilos personalizados */
+    .product-card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-card-body {
+      padding: 15px;
+    }
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+    .filter-sidebar {
+      border-right: 1px solid #ddd;
+      padding-right: 20px;
+    }
+    .filter-sidebar h4 {
+      font-size: 1.25rem;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .product-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .carousel-item {
+      position: relative;
+      height: 300px;
+    }
+    .carousel-item img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    .carousel-caption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: white;
+      font-size: 2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      animation: slideIn 1s ease-out;
+    }
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(-100%); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+    }
+  </style>
+</head>
 
-    <style>
-      .product-card {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 30px;
-      }
-
-      .product-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
-
-      .product-card-body {
-        padding: 15px;
-      }
-
-      .product-price {
-        font-size: 1.25rem;
-        font-weight: bold;
-      }
-
-      .filter-sidebar {
-        border-right: 1px solid #ddd;
-        padding-right: 20px;
-      }
-
-      .filter-sidebar h4 {
-        font-size: 1.25rem;
-      }
-
-      .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px;
-      }
-
-      .product-card .product-name {
-        font-size: 1.1rem;
-        font-weight: bold;
-      }
-
-      .filter-sidebar .form-check-label {
-        font-size: 0.9rem;
-      }
-
-      /* Estilos para el carousel y animación de texto */
-      .carousel-item {
-        position: relative;
-        height: 300px;
-       
-      }
-
-      .carousel-item img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
-
-      .carousel-caption {
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: white;
-        font-size: 2rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        animation: slideIn 1s ease-out;
-      }
-      
-
-      @keyframes slideIn {
-        0% {
-    opacity: 0;
-    transform: translateY(-100%); /* Comienza fuera de la pantalla, arriba */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0); /* Llega a su posición final en el centro */
-  }
-      }
-    </style>
-  </head>
-  <body class="d-flex flex-column">
-    
-    <header>
-      <nav class="navbar bg-body-tertiary fixed-top">
+<body class="d-flex flex-column">
+  <header>
+    <nav class="navbar bg-black fixed-top" aria-label="Menú principal">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">TICKET LOGGER</a>
+        <a class="navbar-brand text-white" href="/">Ticket Logger - Gestión de Tickets</a>
+
         <div class="d-flex">
-          <button id="login" class="btn btn-outline-primary me-2">
-            <a class="nav-link" href="/login">Login</a>
+          <!-- Botones corregidos: no deben contener <a> dentro -->
+          <a href="/login" class="btn btn-outline-primary me-2" role="button" aria-label="Iniciar sesión">Iniciar Sesión</a>
+          <a href="/registro" class="btn btn-outline-primary me-2" role="button" aria-label="Registrarse">Registrarse</a>
+
+          <!-- Botón para cambiar tema con icono accesible -->
+          <button id="themeToggle" class="btn btn-outline-primary me-2" aria-label="Cambiar tema claro/oscuro">
+            <i class="bi bi-sun" id="themeIcon" aria-hidden="true"></i>
           </button>
-          <button id="registro" class="btn btn-outline-primary me-2">
-            <a class="nav-link" href="/registro">Registro</a>
-          </button>
-          <button id="themeToggle" class="btn btn-outline-primary me-2">
-            <i class="bi bi-sun" id="themeIcon"></i>
-          </button>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Abrir menú de navegación">
+            <span class="navbar-toggler-icon" aria-hidden="true"></span>
           </button>
         </div>
+
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/productos-supermercado">Productos más vendidos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a>
-              </li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link" href="/formulario-pago.html">Contrata mis servicios</a></li>
+              <li class="nav-item"><a class="nav-link" href="/productos-supermercado">Productos más vendidos</a></li>
+              <li class="nav-item"><a class="nav-link" href="/buscador-supermercado-zona">Buscador supermercado</a></li>
+              <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
             </ul>
-            <form class="d-flex mt-3" role="search">
-              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
           </div>
+        </div>
       </div>
     </nav>
-    </header>
+  </header>
 
-    <main class="container py-5">
-      <div class="row">
-        <div class="col-md-3 filter-sidebar">
-          <br>  
-          <h4>Filtros</h4>
-          <div class="mb-3">
-            <h5>Categoría</h5>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="frutas" id="filterFrutas">
-              <label class="form-check-label" for="filterFrutas">Frutas</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="verduras" id="filterVerduras">
-              <label class="form-check-label" for="filterVerduras">Verduras</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="panadería" id="filterPanaderia">
-              <label class="form-check-label" for="filterPanaderia">Panadería</label>
-            </div>
+  <!-- Main -->
+  <main class="container py-5 mt-4">
+    <div class="row">
+      <aside class="col-md-3 filter-sidebar" aria-label="Filtros de búsqueda">
+        <br>
+        <h4>Filtros</h4>
+        <!-- Categoría -->
+        <div class="mb-3">
+          <h5>Categoría</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="frutas" id="filterFrutas">
+            <label class="form-check-label" for="filterFrutas">Frutas</label>
           </div>
-
-          <div class="mb-3">
-            <h5>Rango de Precio</h5>
-            <input type="range" class="form-range" id="priceRange" min="0" max="500" step="10">
-            <p>Precio: $0 - <span id="priceRangeValue">500</span></p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="verduras" id="filterVerduras">
+            <label class="form-check-label" for="filterVerduras">Verduras</label>
           </div>
-
-          <div class="mb-3">
-            <h5>Marca</h5>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="marcaA" id="filterMarcaA">
-              <label class="form-check-label" for="filterMarcaA">Marca A</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="marcaB" id="filterMarcaB">
-              <label class="form-check-label" for="filterMarcaB">Marca B</label>
-            </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="panadería" id="filterPanaderia">
+            <label class="form-check-label" for="filterPanaderia">Panadería</label>
           </div>
         </div>
 
-        <div class="col-md-9">
-          <br>  
-          <h1 class="text-center mb-4">Productos más vendidos</h1>
+        <!-- Precio -->
+        <div class="mb-3">
+          <h5>Rango de Precio</h5>
+          <input type="range" class="form-range" id="priceRange" min="0" max="500" step="10">
+          <p>Precio: $0 - <span id="priceRangeValue">500</span></p>
+        </div>
 
-          <!-- Carousel -->
-          <div id="carouselExample" class="carousel slide mb-5" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Producto 1">
-                <div class="carousel-caption">
-                  Producto 1: ¡El mejor de la temporada!
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Producto 2">
-                <div class="carousel-caption">
-                  Producto 2: ¡No te lo puedes perder!
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Producto 3">
-                <div class="carousel-caption">
-                  Producto 3: ¡El favorito de todos!
-                </div>
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+        <!-- Marca -->
+        <div class="mb-3">
+          <h5>Marca</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="marcaA" id="filterMarcaA">
+            <label class="form-check-label" for="filterMarcaA">Marca A</label>
           </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="marcaB" id="filterMarcaB">
+            <label class="form-check-label" for="filterMarcaB">Marca B</label>
+          </div>
+        </div>
+      </aside>
 
-          <!-- Producto Grid -->
-          <div class="product-grid">
+      <section class="col-md-9">
+        <br>
+        <h1 class="text-center mb-4">Productos más vendidos</h1>
+
+        <!-- Carousel -->
+        <div id="carouselExample" class="carousel slide mb-5" data-bs-ride="carousel" aria-label="Productos destacados">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://placehold.co/800x400" class="d-block w-100" alt="Producto 1 destacado">
+              <div class="carousel-caption">Producto 1: ¡El mejor de la temporada!</div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://placehold.co/800x400" class="d-block w-100" alt="Producto 2 destacado">
+              <div class="carousel-caption">Producto 2: ¡No te lo puedes perder!</div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://placehold.co/800x400" class="d-block w-100" alt="Producto 3 destacado">
+              <div class="carousel-caption">Producto 3: ¡El favorito de todos!</div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" aria-label="Anterior">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" aria-label="Siguiente">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+
+        <!-- Productos -->
+        <div class="product-grid" aria-label="Lista de productos">
             <div class="product-card">
-              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <img src="https://placehold.co/300x200" alt="Producto 1">
               <div class="product-card-body">
                 <p class="product-name">Producto 1</p>
                 <p class="product-price">$16.00</p>
                 <button class="btn btn-primary w-100">Ver más información</button>
               </div>
             </div>
+
             <div class="product-card">
-              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <img src="https://placehold.co/300x200" alt="Producto 2">
               <div class="product-card-body">
                 <p class="product-name">Producto 2</p>
                 <p class="product-price">$38.00</p>
                 <button class="btn btn-primary w-100">Ver más información</button>
               </div>
             </div>
+
             <div class="product-card">
-              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <img src="https://placehold.co/300x200" alt="Producto 3">
               <div class="product-card-body">
                 <p class="product-name">Producto 3</p>
                 <p class="product-price">$22.00</p>
                 <button class="btn btn-primary w-100">Ver más información</button>
               </div>
             </div>
+
             <div class="product-card">
-              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <img src="https://placehold.co/300x200" alt="Producto 4">
               <div class="product-card-body">
                 <p class="product-name">Producto 4</p>
                 <p class="product-price">$15.00</p>
                 <button class="btn btn-primary w-100">Ver más información</button>
               </div>
             </div>
+
             <div class="product-card">
-              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <img src="https://placehold.co/300x200" alt="Producto 5">
               <div class="product-card-body">
                 <p class="product-name">Producto 5</p>
                 <p class="product-price">$30.00</p>
                 <button class="btn btn-primary w-100">Ver más información</button>
               </div>
             </div>
+
             <div class="product-card">
-              <img src="https://via.placeholder.com/300x200" alt="Producto 1">
+              <img src="https://placehold.co/300x200" alt="Producto 6">
               <div class="product-card-body">
                 <p class="product-name">Producto 6</p>
                 <p class="product-price">$54.00</p>
                 <button class="btn btn-primary w-100">Ver más información</button>
               </div>
             </div>
-            <!-- Repite los productos como lo has hecho antes -->
-          </div>
         </div>
-      </div>
-    </main>
+      </section>
+    </div>
+  </main>
 
-    <footer class="container-fluid text-muted py-5">
+    <!-- FOOTER -->
+    <footer class="container-fluid bg-black text-white py-5 mt-auto">
       <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p class="mb-1">Este sitio web es &copy; 2024 por Daniel Vilar Martínez.</p>
+        <p class="float-end mb-1"><a href="#">Volver arriba</a></p>
+        <p class="mb-1">Este portafolio es &copy; 2024 por Daniel Vilar Martínez. ¡Mira los proyectos!</p>
         <p class="mb-0">¿Quieres contratar mis servicios? <a href="/formulario-pago.html">Contrátanos</a> o <a href="#">contacta con nosotros</a>.</p>
+        <div class="mt-4 text-center">
+          <p>
+            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+            </a>
+            <br>
+            Este contenido está bajo una <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">licencia de Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.
+          </p>
+        </div>      
       </div>
     </footer>
 
-    <script type="module" src="/assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <script type="module" src="/assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
